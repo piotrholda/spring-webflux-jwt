@@ -1,0 +1,2 @@
+jwt:
+  token-expiration-seconds: 1800
