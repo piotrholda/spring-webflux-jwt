@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequiredArgsConstructor
-class LoginController {
+public class LoginController {
 
     private final PasswordEncoder passwordEncoder;
     private final ReactiveUserDetailsService userDetailsService;
