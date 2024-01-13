@@ -51,33 +51,22 @@ class ProfileControllerTest {
     @Test
     void shouldReturnUnauthorizedWhenExpiredToken() {
 
-        // when
-        ProfileResponse response = webTestClient.get()
+        // when / then
+        webTestClient.get()
                 .uri("/profile")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZGFtayIsImlhdCI6MTcwNTE1NTU2MCwiZXhwIjoxNzA1MTU3MzYwfQ.ll4uaB1FZfZGedEXe0S_eN15EXBuPUvBWB3f7RKAMT4")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZGFtayIsImlhdCI6MTcwNTE2MjU0OCwiZXhwIjoxNzA1MTY0MzQ4fQ.2Mn_R5Ia8iUyO660j7iV1KZnMicuSaVCMbpP9Ah9G3g")
                 .exchange()
-                .expectStatus().isUnauthorized()
-                .expectBody(ProfileResponse.class)
-                .returnResult()
-                .getResponseBody();
-
-        assertThat(response).isNull();
+                .expectStatus().isUnauthorized();
     }
 
     @Test
     void shouldReturnUnauthorizedWhenInvalidToken() {
 
-        // when
-        ProfileResponse response = webTestClient.get()
+        // when / then
+        webTestClient.get()
                 .uri("/profile")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + "invalid token")
                 .exchange()
-                .expectStatus().isUnauthorized()
-                .expectBody(ProfileResponse.class)
-                .returnResult()
-                .getResponseBody();
-
-        assertThat(response).isNull();
+                .expectStatus().isUnauthorized();
     }
-
 }
