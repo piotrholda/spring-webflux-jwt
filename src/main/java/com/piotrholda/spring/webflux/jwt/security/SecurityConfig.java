@@ -8,10 +8,6 @@ import org.springframework.security.authentication.ReactiveAuthenticationManager
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.AuthenticationWebFilter;
 import org.springframework.security.web.server.authentication.ServerAuthenticationConverter;
@@ -19,21 +15,6 @@ import org.springframework.security.web.server.authentication.ServerAuthenticati
 @Configuration
 @EnableWebFluxSecurity
 class SecurityConfig {
-
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    MapReactiveUserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        var user = User.builder()
-                .username("adamk")
-                .password(passwordEncoder().encode("password"))
-                .roles("USER")
-                .build();
-        return new MapReactiveUserDetailsService(user);
-    }
 
     @Bean
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http,
