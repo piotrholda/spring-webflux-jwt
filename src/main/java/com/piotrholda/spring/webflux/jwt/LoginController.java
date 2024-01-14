@@ -26,5 +26,4 @@ public class LoginController {
                 .map(LoginResponse::new)
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED)));
     }
-
 }
